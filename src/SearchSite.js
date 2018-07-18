@@ -11,8 +11,13 @@ class SearchSite extends Component {
 
   handleInput = e => {
     let searchQuery = e.target.value;
-    this.setState({ query: searchQuery.trim() });
+    this.setState({ query: searchQuery.trim() }, () => {
+      if (this.state.query) {
+        this.addBooks(this.state.query);
+      }
+    });
   };
+
 
   addBooks = query => {
     BooksAPI.search(query)
@@ -42,6 +47,7 @@ class SearchSite extends Component {
         return books;
       })
       .then(books => {
+        console.log("b")
         this.setState({ searchedBooks: books });
       });
   };
@@ -49,9 +55,7 @@ class SearchSite extends Component {
   render() {
     const defaultShelf = "none";
 
-    if (this.state.query) {
-      this.addBooks(this.state.query);
-    }
+    console.log('r')
 
     return (
       <div className="search-books">

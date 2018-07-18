@@ -14,6 +14,8 @@ class SearchSite extends Component {
     this.setState({ query: searchQuery.trim() }, () => {
       if (this.state.query) {
         this.addBooks(this.state.query);
+      } else {
+        this.removeBooks();
       }
     });
   };
@@ -39,15 +41,17 @@ class SearchSite extends Component {
           books = [];
         }
 
-        if (this.state.query === "") {
-          books = [];
-        }
         return books;
       })
       .then(books => {
         this.setState({ searchedBooks: books });
       });
+
   };
+
+  removeBooks = () => {
+    this.setState({ searchedBooks: [] });
+  }
 
   render() {
     const defaultShelf = "none";

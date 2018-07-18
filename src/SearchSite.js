@@ -18,7 +18,6 @@ class SearchSite extends Component {
     });
   };
 
-
   addBooks = query => {
     BooksAPI.search(query)
       .then(books => {
@@ -43,19 +42,15 @@ class SearchSite extends Component {
         if (this.state.query === "") {
           books = [];
         }
-
         return books;
       })
       .then(books => {
-        console.log("b")
         this.setState({ searchedBooks: books });
       });
   };
 
   render() {
     const defaultShelf = "none";
-
-    console.log('r')
 
     return (
       <div className="search-books">
@@ -76,12 +71,9 @@ class SearchSite extends Component {
             {this.state.searchedBooks.map(book => (
               <Book
                 key={book.id}
-                title={book.title}
-                authors={book.authors ? book.authors : ""}
                 currentBook={book}
-                image={book.imageLinks ? book.imageLinks.thumbnail : ""}
-                updateBooks={this.props.updateBooks}
                 defaultShelf={defaultShelf}
+                updateBooks={this.props.updateBooks}
                 books={this.props.books}
               />
             ))}
